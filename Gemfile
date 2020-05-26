@@ -58,7 +58,7 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
   gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
-  gem 'factory_bot', '~> 5.2'
+  gem 'factory_bot_rails', '~> 5.2'
   gem 'shoulda-matchers', '~> 4.3'
 end
 
