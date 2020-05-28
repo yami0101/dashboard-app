@@ -7,3 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 user = User.create(email: 'test@test.ee', password: 'testpassword', password_confirmation: 'testpassword')
+
+10.times do |i|
+  dashboard = Dashboard.new(title: "Random Title #{i}", content: "Some random content #{i}")
+  user.dashboards << dashboard
+end

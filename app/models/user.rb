@@ -4,5 +4,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :dashboards, dependent: :destroy
+  has_many :dashboards, -> { order(position: :asc) }, dependent: :destroy
 end
