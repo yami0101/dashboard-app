@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a test app.
+If you have the credentials, you can login and manage your dashboards.
 
-Things you may want to cover:
+* Ruby version 2.6.6
 
-* Ruby version
-
-* System dependencies
+* System dependencies: nodejs, yarn, pg
 
 * Configuration
 
-* Database creation
+* Database creation: rails db:schema:load
 
-* Database initialization
+* Database initialization: rails db:seed
 
-* How to run the test suite
+* How to run the test suite: rspec spec
 
-* Services (job queues, cache servers, search engines, etc.)
+* Services: none
 
-* Deployment instructions
+* Deployment instructions: heroku
 
-* ...
+* 
