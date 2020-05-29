@@ -1,0 +1,7 @@
+<h1>Editing Dashboard</h1>
+<%= link_to 'Show', @dashboard, class: 'badge badge-info' %> |
+<%= link_to 'Back', dashboards_path, class: 'badge badge-secondary' %>
+<hr>
+
+<%= render 'form', dashboard: @dashboard %>
+

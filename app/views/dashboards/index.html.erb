@@ -1,0 +1,16 @@
+<%= link_to 'New Dashboard', new_dashboard_path, class: 'btn btn-primary' %>
+  <div class="row" id="dashboards">
+    <% @dashboards.each do |dashboard| %>
+      <div class="col-sm-4 py-2" data-id="<%= dashboard.id %>">
+        <div class="card h-100 border-primary">
+          <div class="card-body">
+            <h3 class="card-title"><%= dashboard.title %></h3>
+            <p class="card-text"><%= dashboard.content %></p>
+            <%= link_to 'Show', dashboard, class: 'badge badge-info' %>
+            <%= link_to 'Edit', edit_dashboard_path(dashboard), class: 'badge badge-dark' %>
+            <%= link_to 'Destroy', dashboard, method: :delete, data: { confirm: 'Are you sure?' }, class: 'badge badge-danger' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>

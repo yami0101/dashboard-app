@@ -1,0 +1,7 @@
+<%= link_to 'Edit', edit_dashboard_path(@dashboard), class: 'badge badge-info' %> |
+<%= link_to 'Back', dashboards_path, class: 'badge badge-secondary' %>
+<hr>
+<p>
+  <b>Content:</b></br>
+  <%= @dashboard.content %>
+</p>
