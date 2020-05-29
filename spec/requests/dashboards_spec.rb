@@ -118,6 +118,48 @@ RSpec.describe "/dashboards", type: :request do
     end
   end
 
+  describe "PATCH /update-positions" do
+    let(:user){ create(:user) }
+    let!(:dashboard1) { create(:dashboard, position: 1, user: user) }
+    let!(:dashboard2) { create(:dashboard, position: 2, user: user) }
+    let!(:dashboard3) { create(:dashboard, position: 3, user: user) }
+    let(:current_dashboards_order) { user.dashboards.pluck(:id).map(&:to_s) }
+    
+    context "with valid request params" do
+      let(:new_dashboards_order) { ["1", "3", "2"] }
+
+      it "updates the users dashboards positions" do
+        headers = { "Accept": "application/json", "X-Requested-With": "XMLHttpRequest" }
+        
+        expect { 
+          patch update_dashboard_positions_url, params: { dashboards_order: new_dashboards_order }, headers: headers
+        }.to change { 
+          user.dashboards.pluck(:id).map(&:to_s)
+        }.from(current_dashboards_order).to(new_dashboards_order)
+
+        expect(response.content_type).to eq("application/json")
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "with invalid request params" do
+      let(:new_dashboards_order) { ["foo", "bar", "baz"] }
+
+      it "doesnt update the users dashboard position" do
+        headers = { "Accept": "application/json", "X-Requested-With": "XMLHttpRequest" }
+        
+        expect { 
+          patch update_dashboard_positions_url, params: { dashboards: new_dashboards_order }, headers: headers
+        }.not_to change { 
+          user.dashboards.pluck(:id).map(&:to_s)
+        }.from(current_dashboards_order)
+
+        expect(response.content_type).to eq("application/json")
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+  end
+
   describe "DELETE /destroy" do
     it "destroys the requested dashboard" do
       dashboard = Dashboard.create! valid_attributes

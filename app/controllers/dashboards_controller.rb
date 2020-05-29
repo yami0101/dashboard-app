@@ -1,15 +1,13 @@
 class DashboardsController < ApplicationController
-  before_action :set_user, only: [:index, :create]
+  before_action :set_user, only: [:index, :create, :update_positions]
   before_action :set_dashboard, only: [:show, :edit, :update, :destroy]
 
   # GET /dashboards
-  # GET /dashboards.json
   def index
     @dashboards = @user.dashboards
   end
 
   # GET /dashboards/1
-  # GET /dashboards/1.json
   def show
   end
 
@@ -23,7 +21,6 @@ class DashboardsController < ApplicationController
   end
 
   # POST /dashboards
-  # POST /dashboards.json
   def create
     @dashboard = @user.dashboards.build(dashboard_params)
 
@@ -37,7 +34,6 @@ class DashboardsController < ApplicationController
   end
 
   # PATCH/PUT /dashboards/1
-  # PATCH/PUT /dashboards/1.json
   def update
     respond_to do |format|
       if @dashboard.update(dashboard_params)
@@ -48,8 +44,27 @@ class DashboardsController < ApplicationController
     end
   end
 
+  # PATCH /dashboards/update-positions
+  # dashboards_order = ["1", "2", "3", "4", "5"]
+  def update_positions
+    new_dashboard_positions = params[:dashboards_order]&.map(&:to_i)
+    user_dashboards = @user.dashboards.where(id: new_dashboard_positions)
+
+    return head :not_found if user_dashboards.none?
+
+    data_to_import = user_dashboards.map do |dashboard|
+      dashboard.position = new_dashboard_positions.index(dashboard.id) + 1
+      dashboard
+    end
+    
+    Dashboard.import data_to_import, on_duplicate_key_update: [:position]
+
+    respond_to do |format|
+      format.json { head :ok }
+    end
+  end
+
   # DELETE /dashboards/1
-  # DELETE /dashboards/1.json
   def destroy
     @dashboard.destroy
     respond_to do |format|
