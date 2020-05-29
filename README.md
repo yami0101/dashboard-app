@@ -19,4 +19,4 @@ If you have the credentials, you can login and manage your dashboards.
 
 * Deployment instructions: heroku
 
-* 
+* https://svd-dashboard-app.herokuapp.com

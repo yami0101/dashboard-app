@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user1 = User.create(email: 'test1@test.ee', password: 'testpassword1', password_confirmation: 'testpassword1')
-user2 = User.create(email: 'test2@test.ee', password: 'testpassword2', password_confirmation: 'testpassword2')
+user1 = User.create(email: 'test1@test.ee', password: Rails.application.credentials.test_password_1, password_confirmation: Rails.application.credentials.test_password_1)
+user2 = User.create(email: 'test2@test.ee', password: Rails.application.credentials.test_password_2, password_confirmation: Rails.application.credentials.test_password_2)
 
 10.times do |i|
   dashboard = Dashboard.new(title: "Random Title #{i}", content: "Some random content #{i}")
