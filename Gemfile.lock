@@ -242,7 +242,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
-  devise (~> 4.7, >= 4.7.1)
+  devise (~> 4.7.0, >= 4.7.1)
   devise-bootstrap-views (~> 1.1)
   factory_bot_rails (~> 5.2)
   jbuilder (~> 2.5)
@@ -262,7 +262,7 @@ DEPENDENCIES
   webpacker (~> 5.1, >= 5.1.1)
 
 RUBY VERSION
-   ruby 2.6.3p62
+   ruby 2.6.6p146
 
 BUNDLED WITH
    1.17.2
