@@ -75,7 +75,7 @@ class DashboardsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_dashboard
-      @dashboard = Dashboard.find(params[:id])
+      @dashboard = current_user.dashboards.find(params[:id])
     end
 
     def set_user
